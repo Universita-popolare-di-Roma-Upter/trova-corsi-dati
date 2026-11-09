@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Upter · Trova corsi</title>
+<meta name="description" content="Cerca i corsi dell'Upter, Università popolare di Roma: argomenti, giorni, sedi, costi e iscrizione. Notizie, eventi e contatti della Segreteria.">
+<meta name="theme-color" content="#0d5c63">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Trova corsi">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+.banner { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; background: var(--mark-soft); border: 1px solid var(--mark); border-radius: var(--radius); padding: 12px 16px; }
+.banner p { margin: 0; flex: 1 1 220px; }
+
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: italic; font-weight: 400; font-display: swap; src: url(fonts/AtkinsonHyperlegible-400i-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: italic; font-weight: 400; font-display: swap; src: url(fonts/AtkinsonHyperlegible-400i-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/AtkinsonHyperlegible-400-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 400; font-display: swap; src: url(fonts/AtkinsonHyperlegible-400-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/AtkinsonHyperlegible-700-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/AtkinsonHyperlegible-700-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Spectral'; font-style: normal; font-weight: 600; font-display: swap; src: url(fonts/Spectral-600-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Spectral'; font-style: normal; font-weight: 600; font-display: swap; src: url(fonts/Spectral-600-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Spectral'; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/Spectral-700-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Spectral'; font-style: normal; font-weight: 700; font-display: swap; src: url(fonts/Spectral-700-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+
+/* Layout: una colonna leggibile come la Guida ai corsi; testata fissa con tre schede; schede-corso come voci di catalogo con il codice in evidenza */
+:root {
+  --paper: #fafaf7;
+  --ink: #1b2433;
+  --muted: #4d5768;
+  --line: #d9dde3;
+  --card: #ffffff;
+  --accent: #0d5c63;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2efef;
+  --mark: #c8871a;
+  --mark-soft: #fbf0d9;
+  --past: #6b7280;
+  --past-soft: #eef0f3;
+  --todo: #8a3b12;
+  --todo-soft: #fdebe1;
+  --font-display: "Spectral", Georgia, "Times New Roman", serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", Verdana, Arial, sans-serif;
+  --step-0: 1.125rem;
+  --step-1: 1.3rem;
+  --step-2: 1.6rem;
+  --step-3: 2.1rem;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #12171f; --ink: #eef1f5; --muted: #b3bcc9; --line: #2e3744; --card: #1a212c;
+    --accent: #5cc3c9; --accent-ink: #0d1a1c; --accent-soft: #173539; --mark: #f0b44a; --mark-soft: #3a2e17;
+    --past: #9aa3b1; --past-soft: #242b36; --todo: #ffb38a; --todo-soft: #3d2418; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #12171f; --ink: #eef1f5; --muted: #b3bcc9; --line: #2e3744; --card: #1a212c;
+  --accent: #5cc3c9; --accent-ink: #0d1a1c; --accent-soft: #173539; --mark: #f0b44a; --mark-soft: #3a2e17;
+  --past: #9aa3b1; --past-soft: #242b36; --todo: #ffb38a; --todo-soft: #3d2418; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.55;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--accent); }
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--mark); outline-offset: 2px; }
+.wrap {
+  max-width: 860px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header.top { background: var(--accent); color: var(--accent-ink); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+header.top .wrap { padding-block: 14px 0; display: grid; gap: 10px; }
+.brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.brand h1 { font-family: var(--font-display); font-size: var(--step-2); margin: 0; letter-spacing: .01em; text-wrap: balance; }
+.brand span { font-size: 1rem; opacity: .9; }
+nav.tabs { display: flex; gap: 4px; overflow-x: auto; }
+nav.tabs a {
+  color: var(--accent-ink); text-decoration: none; font-weight: 700; font-size: 1.05rem;
+  padding: 12px 16px; border-radius: 10px 10px 0 0; white-space: nowrap; min-height: 48px; display: flex; align-items: center;
+}
+nav.tabs a[aria-current="page"] { background: var(--paper); color: var(--ink); }
+nav.tabs a { gap: 8px; }
+nav.tabs svg { width: 20px; height: 20px; flex: none; }
+/* Sul telefono le sezioni diventano una barra in basso, come in un'app */
+@media (max-width: 640px) {
+  header.top .wrap { padding-block: 12px 12px; }
+  .brand span { display: none; }
+  nav.tabs {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 15; gap: 0; overflow: visible;
+    background: var(--card); border-top: 1px solid var(--line);
+    padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  nav.tabs a {
+    flex: 1 1 0; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px;
+    border-radius: 0; padding: 8px 4px; color: var(--muted); font-size: .85rem; white-space: normal; text-align: center; line-height: 1.15;
+  }
+  nav.tabs a svg { width: 26px; height: 26px; }
+  nav.tabs a[aria-current="page"] { background: var(--accent-soft); color: var(--accent); }
+  main .wrap { padding-block: 18px 40px; }
+  main { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+  .toast { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+}
+main .wrap { padding-block: 22px 60px; display: grid; gap: 22px; }
+h2 { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.15; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-size: var(--step-1); line-height: 1.25; margin: 0; text-wrap: balance; }
+.lead { margin: 0; color: var(--muted); max-width: 62ch; }
+.search { display: grid; gap: 8px; }
+.search label { font-weight: 700; font-size: var(--step-1); }
+.search input {
+  font: inherit; font-size: 1.25rem; padding: 14px 16px; border: 2px solid var(--line); border-radius: var(--radius);
+  background: var(--card); color: var(--ink); width: 100%; min-height: 56px;
+}
+.search input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+.hint { font-size: 1rem; color: var(--muted); margin: 0; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; min-width: 0; }
+legend { font-weight: 700; padding: 0; margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font: inherit; font-size: 1rem; border: 2px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 999px; padding: 8px 14px; min-height: 44px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.filters { display: grid; gap: 18px; }
+.row2 { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; }
+.row2 > div { display: grid; gap: 6px; min-width: 0; flex: 1 1 220px; }
+.row2 label { font-weight: 700; }
+select {
+  font: inherit; padding: 10px 12px; border: 2px solid var(--line); border-radius: var(--radius);
+  background: var(--card); color: var(--ink); min-height: 48px; width: 100%;
+}
+.check { display: flex; gap: 10px; align-items: center; font-weight: 700; cursor: pointer; min-height: 48px; }
+.check input { width: 26px; height: 26px; accent-color: var(--accent); }
+.count { font-weight: 700; margin: 0; }
+.list { display: grid; gap: 14px; }
+.course { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 10px; }
+.course .head { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+.course .head > div { min-width: 0; display: grid; gap: 4px; }
+.code { font-variant-numeric: tabular-nums; font-size: .95rem; color: var(--muted); letter-spacing: .04em; }
+.teacher { color: var(--muted); }
+.badge { font-size: .9rem; font-weight: 700; border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+.badge.soon { background: var(--mark-soft); color: var(--ink); border: 1px solid var(--mark); }
+.badge.past { background: var(--past-soft); color: var(--past); }
+.badge.full { background: var(--todo-soft); color: var(--todo); border: 1px solid var(--todo); }
+.badges { display: grid; gap: 6px; justify-items: end; flex: none; }
+.list > *, .course > *, .course .head > div { min-width: 0; }
+.course h3, .course p, .course dd { overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .course .head { flex-direction: column; gap: 8px; }
+  .badges { justify-items: start; grid-auto-flow: column; justify-content: start; gap: 6px; flex-wrap: wrap; }
+  .badge { white-space: normal; }
+}
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 6px 18px; margin: 0; }
+.facts div { display: grid; }
+.facts dt { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+details { border-top: 1px solid var(--line); padding-top: 8px; }
+summary { cursor: pointer; font-weight: 700; color: var(--accent); min-height: 44px; display: flex; align-items: center; }
+details p { margin: 8px 0; max-width: 65ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  font: inherit; font-size: 1rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; min-height: 48px; border-radius: var(--radius); border: 2px solid var(--accent);
+  background: var(--accent); color: var(--accent-ink); cursor: pointer;
+}
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn.go { font-size: 1.1rem; padding-inline: 22px; }
+.btn.off { background: var(--past-soft); border-color: var(--line); color: var(--past); cursor: default; }
+.course > .hint { font-size: .95rem; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.more { justify-self: center; }
+.empty { background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius); padding: 20px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 12px; }
+.panel.key { border: 2px solid var(--accent); }
+.panel ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.news { display: grid; gap: 12px; }
+.ev { display: grid; grid-template-columns: 84px 1fr; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.ev .date { text-align: center; border-right: 2px solid var(--mark); padding-right: 12px; font-variant-numeric: tabular-nums; }
+.ev .date b { display: block; font-family: var(--font-display); font-size: 2rem; line-height: 1; }
+.ev .date small { text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--muted); font-size: .9rem; }
+.ev > div:last-child { min-width: 0; display: grid; gap: 4px; }
+.ev.isPast { opacity: .7; }
+.ev p { margin: 0; color: var(--muted); }
+.kind { font-size: .85rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 700; color: var(--accent); }
+.channels { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.ch { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 10px; align-content: start; }
+.ch .ico { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.ch .ico svg { width: 24px; height: 24px; }
+.ch p { margin: 0; color: var(--muted); }
+.todo { background: var(--todo-soft); color: var(--todo); font-weight: 700; border-radius: 6px; padding: 2px 6px; }
+.contact { display: grid; gap: 4px; }
+.big { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; user-select: all; }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin: 0; }
+.hours dt { font-weight: 700; }
+.hours dd { margin: 0; font-variant-numeric: tabular-nums; }
+footer { color: var(--muted); font-size: 1rem; border-top: 1px solid var(--line); padding-top: 16px; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 12px 18px; border-radius: 10px; font-weight: 700; z-index: 20; max-width: calc(100% - 32px); }
+@media (max-width: 480px) {
+  .ev { grid-template-columns: 64px 1fr; gap: 12px; }
+  .ev .date b { font-size: 1.6rem; }
+  h2 { font-size: 1.75rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><h1>Upter · Trova corsi</h1><span>Università popolare di Roma · Palazzo Englefield</span></div>
+    <nav class="tabs" aria-label="Sezioni">
+      <a href="#corsi" data-view="corsi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>Corsi</span></a>
+      <a href="#notizie" data-view="notizie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Notizie ed eventi</span></a>
+      <a href="#canali" data-view="canali"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Seguici e contatti</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- CORSI -->
+  <section id="v-corsi" class="wrap" aria-labelledby="t-corsi">
+    <h2 id="t-corsi">Cerca un corso</h2>
+    <div class="banner" id="banner-installa" hidden>
+      <p>Vuoi «Trova corsi» sul telefono, come un’app?</p>
+      <a class="btn ghost" href="#canali" data-goto-installa>Ecco come fare</a>
+    </div>
+    <p class="lead">I corsi dell’anno 2026-27, aggiornati con i dati della Segreteria. Scrivi una parola, il nome del docente o il codice del corso.</p>
+
+    <div class="search">
+      <label for="q">Che cosa vuoi imparare?</label>
+      <input id="q" type="search" autocomplete="off" placeholder="Esempio: inglese, Roma, acquerello, 52204">
+      <p class="hint">Non serve scrivere la parola intera: bastano le prime lettere.</p>
+    </div>
+
+    <div class="filters">
+      <fieldset>
+        <legend>Argomento</legend>
+        <div class="chips" id="areas"></div>
+      </fieldset>
+      <div class="row2">
+        <div>
+          <label for="giorno">Giorno della settimana</label>
+          <select id="giorno">
+            <option value="">Tutti i giorni</option>
+            <option>Lun</option><option>Mar</option><option>Mer</option><option>Gio</option><option>Ven</option><option>Sab</option>
+          </select>
+        </div>
+        <div>
+          <label for="sede">Dove</label>
+          <select id="sede"><option value="">Tutte le sedi</option></select>
+        </div>
+        <div>
+          <label for="fascia">Momento del giorno</label>
+          <select id="fascia">
+            <option value="">Qualsiasi ora</option>
+            <option value="m">Mattina (prima delle 13)</option>
+            <option value="p">Pomeriggio (13–19)</option>
+            <option value="s">Sera (dalle 19)</option>
+          </select>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" id="futuri"> Mostra solo i corsi che devono ancora cominciare</label>
+      <label class="check"><input type="checkbox" id="liberi"> Nascondi i corsi con i posti esauriti</label>
+    </div>
+
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="list" id="list"></div>
+    <button class="btn ghost more" id="more" type="button" hidden>Mostra altri corsi</button>
+
+    <div class="panel key" id="regole">
+      <h3>Come ci si iscrive</h3>
+      <ul>
+        <li><b>In sede</b>, senza bisogno di internet: Segreteria di Palazzo Englefield, Via Quattro Novembre 157, Roma. Orari nella scheda «Seguici e contatti».</li>
+        <li><b>Online</b> con il pulsante «Iscriviti ora»: si apre la pagina del corso su upter.it. Lì aggiungi il corso al carrello, accedi o registrati e paghi con carta o bonifico.</li>
+        <li><b>Con bonifico</b>: nella causale scrivi nome e cognome, codice socio e codice del corso. Poi manda la ricevuta a <span class="big" style="font-size:1rem">bonifici@upter.it</span>.</li>
+        <li>Per frequentare bisogna essere soci. La quota associativa annuale è di 30 euro (75 euro per tre anni, 500 euro a vita) e non si rimborsa.</li>
+      </ul>
+      <h3>Rimborsi e cambi</h3>
+      <ul>
+        <li>Il costo del corso viene restituito solo se il corso non parte (per esempio perché non si raggiunge il numero minimo di iscritti) o se la sede non è disponibile.</li>
+        <li>Le assenze non danno diritto a rimborso. Le lezioni saltate per assenza del docente o della sede si recuperano.</li>
+        <li>Si può cambiare corso fino al giorno prima dell’inizio, passando dalla Segreteria.</li>
+        <li>Per ballo, danza e ginnastica serve il certificato medico per attività non agonistica, da portare dopo la conferma che il corso parte.</li>
+      </ul>
+      <p class="hint">Fonte: Regolamento e Guida ai corsi 2026-27 su upter.it. Prezzi, date e orari possono cambiare: chiedi sempre conferma in Segreteria.</p>
+    </div>
+  </section>
+
+  <!-- NOTIZIE -->
+  <section id="v-notizie" class="wrap" aria-labelledby="t-notizie" hidden>
+    <h2 id="t-notizie">Notizie ed eventi</h2>
+    <p class="lead">Appuntamenti, avvisi e iniziative pubblicati su upter.it. Gli eventi si tengono a Palazzo Englefield, salvo dove è indicato un altro luogo.</p>
+    <label class="check"><input type="checkbox" id="soloProssimi" checked> Mostra solo gli appuntamenti che devono ancora arrivare</label>
+    <div class="news" id="news"></div>
+
+    <div class="panel">
+      <h3>Avvisi</h3>
+      <ul>
+        <li><b>Nuovo numero di telefono</b> della sede centrale: <span class="big" style="font-size:1.1rem">06 9826 6300</span>.</li>
+        <li><b>Esami CILS</b> (certificazione di italiano per stranieri): l’iscrizione si fa solo di persona in Segreteria, anche tramite delegato con delega scritta e copia dei documenti. Non si può prenotare né pagare online.</li>
+        <li><b>Seminario «1527–2027: il Sacco di Roma»</b>, sabato 8 maggio 2027, dalle 10 alle 16, a Palazzo Englefield. Costo 35 euro.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>Iniziative per i soci</h3>
+      <ul>
+        <li><b>Parole in dono</b>: un racconto dei soci diventa un piccolo libro da regalare. <a href="https://www.upter.it/2026/10/01/parole-in-dono/" target="_blank" rel="noopener">Leggi sul sito</a></li>
+        <li><b>Corsi online di Corsi.it</b>: abbonamento annuale a 95 euro per i soci invece di 499, gratuito per chi si iscrive ad almeno tre corsi Upter. <a href="https://www.upter.it/corsi-online/" target="_blank" rel="noopener">La convenzione</a></li>
+        <li><b>Inglese a Malta</b> con condizioni per i soci, anche con il programma per chi ha più di 50 anni. <a href="https://www.upter.it/malta" target="_blank" rel="noopener">La convenzione</a></li>
+        <li><b>Biblioteca virtuale</b>: oltre 600 letture registrate dai volontari su YouTube. <a href="https://youtube.com/playlist?list=PLf1ltPXvHLVwO2ZnIFVZf5NSwMLWvtMv7" target="_blank" rel="noopener">Ascolta</a></li>
+        <li><b>Coro UpterPop</b>, da vent’anni diretto da Milli Taddei: per entrare nel coro chiedi in Segreteria.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CANALI -->
+  <section id="v-canali" class="wrap" aria-labelledby="t-canali" hidden>
+    <h2 id="t-canali">Seguici e contatti</h2>
+    <p class="lead">I canali ufficiali dell’Upter: Facebook, Instagram, Substack e la newsletter. Scegli quello che usi di più. Per iscriverti a un corso puoi sempre venire in Segreteria.</p>
+
+    <div class="panel key" id="installa">
+      <h3>Metti «Trova corsi» sul telefono</h3>
+      <p id="inst-ok" hidden>L’app è già sul tuo telefono. La trovi tra le altre app con l’icona della lente verde.</p>
+      <div id="inst-come">
+        <p><button class="btn" id="inst-btn" type="button" hidden>Installa l’app</button></p>
+        <p><b>Con un telefono Android</b> (Chrome): tocca i tre puntini in alto a destra, poi «Installa app» oppure «Aggiungi a schermata Home».</p>
+        <p><b>Con iPhone o iPad</b> (Safari): tocca il pulsante Condividi, il quadrato con la freccia verso l’alto, poi «Aggiungi alla schermata Home».</p>
+        <p class="hint">L’icona compare tra le altre app. Se sei senza internet, l’app mostra i corsi scaricati l’ultima volta.</p>
+      </div>
+    </div>
+
+    <div class="channels">
+      <div class="ch">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4a22 22 0 0 0-2.5-.1c-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V14h2.7v8z"/></svg></div>
+        <h3>Facebook</h3>
+        <p>Foto, eventi e notizie della comunità Upter.</p>
+        <a class="btn ghost" href="https://www.facebook.com/upteroma" target="_blank" rel="noopener">Apri la pagina Facebook</a>
+      </div>
+
+      <div class="ch">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
+        <h3>Instagram</h3>
+        <p>Immagini dalle lezioni e dai corsi itineranti per Roma.</p>
+        <a class="btn ghost" href="https://www.instagram.com/upterroma/" target="_blank" rel="noopener">Apri Instagram</a>
+      </div>
+
+      <div class="ch">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h16v2.5H4zm0 4.5h16V20l-8-4.5L4 20z"/></svg></div>
+        <h3>Substack</h3>
+        <p>Articoli e approfondimenti dell’Upter da leggere con calma. Puoi riceverli anche per email.</p>
+        <a class="btn ghost" href="https://substack.com/@upter" target="_blank" rel="noopener">Segui l’Upter su Substack</a>
+      </div>
+
+      <div class="ch">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <h3>Newsletter</h3>
+        <p>Le novità per email. Chi si iscrive alla newsletter riceve subito uno sconto aggiuntivo. Ci si può cancellare in ogni momento.</p>
+        <a class="btn" href="https://e492adb7.sibforms.com/serve/MUIFAFMnOr8zaNSvTKVscxfP3-MzRe10LFrkB-ujwCl4DO8LC0piWqtT4_J0C7s5a7vhAZvwQ_kzDwplGldJMVVqmSIzGVezV_3I8I3_SUd-LTISp2h7mTXBJ8HtFOVX8tnWn-8ept_rA5gODNh-kGIhOCF4ZcNQnY_vXErcGfidavKygy1xO3psW-jGmm0lw5kV7hgLZlFCA5qMsQ==" target="_blank" rel="noopener">Iscriviti alla newsletter</a>
+      </div>
+
+      <div class="ch">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8A26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></div>
+        <h3>YouTube</h3>
+        <p>Video degli eventi e conferenze, da rivedere quando vuoi.</p>
+        <a class="btn ghost" href="https://www.youtube.com/@UPTERTV" target="_blank" rel="noopener">Apri il canale UpterTV</a>
+      </div>
+    </div>
+
+    <div class="panel key">
+      <h3>Segreteria di Palazzo Englefield</h3>
+      <div class="contact">
+        <span>Via Quattro Novembre 157, 00187 Roma</span>
+        <span>Telefono</span>
+        <a class="big" href="tel:+390698266300">06 9826 6300</a>
+        <span>Email</span>
+        <a class="big" style="font-size:1.2rem" href="mailto:info@upter.it">info@upter.it</a>
+      </div>
+      <dl class="hours">
+        <dt>Lunedì e venerdì</dt><dd>10–13.30 e 14–16</dd>
+        <dt>Martedì, mercoledì, giovedì</dt><dd>10–13.30 e 14–19</dd>
+        <dt>Sabato e domenica</dt><dd>chiuso</dd>
+      </dl>
+      <p class="hint">In Segreteria ci si iscrive e si paga anche senza computer né telefono.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      Corsi, docenti, date di inizio, costi e posti: dati della Segreteria aggiornati al <span id="agg">…</span>. Descrizioni, giorni e orari: Guida ai corsi 2026-27. Notizie, avvisi e regole: upter.it e Regolamento, consultati il 7 novembre 2026. In caso di differenze vale quanto comunicato dalla Segreteria.
+    </footer>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script type="module">
+async function caricaDati() {
+  try {
+    const r = await fetch("corsi.json", { cache: "no-cache" });
+    if (!r.ok) throw new Error(String(r.status));
+    return await r.json();
+  } catch (e) {
+    return { corsi: [], aggiornato_testo: "" };
+  }
+}
+const DATI = await caricaDati();
+const CORSI = Array.isArray(DATI.corsi) ? DATI.corsi : [];
+document.getElementById("agg").textContent = DATI.aggiornato_testo || "data non disponibile";
+
+const OGGI = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+const EVENTI = [
+  { d: "2026-11-11", ora: "13–15", tipo: "Corso in partenza", t: "Inglese per viaggiare, con Giovanna D’Arrigo", luogo: "Palazzo Englefield", url: "https://www.upter.it/2026/11/03/inglese-per-viaggiare-di-giovanna-darrigo/" },
+  { d: "2026-11-17", ora: "10", tipo: "Conferenza stampa", t: "Presentazione del libro di Francesco Florenzano «Il privilegio di imparare»", luogo: "Senato della Repubblica, Palazzo Madama, Aula Caduti di Nassirya, Via Madama 33", url: "https://www.upter.it/2026/11/05/conferenza-stampa-di-presentazione-del-libro-di-francesco-florenzano-il-privilegio-di-imparare-2/" },
+  { d: "2026-11-18", ora: "16", tipo: "Libri", t: "Presentazione del libro illustrato «Cenere» di Grazia Deledda", luogo: "Palazzo Englefield, Sala di Presidenza" },
+  { d: "2026-11-24", ora: "10", tipo: "Tavola rotonda", t: "Tavola rotonda ispirata al libro «Stai zitta» di Michela Murgia", luogo: "Palazzo Englefield, Sala Convegni" },
+  { d: "2026-11-24", ora: "16", tipo: "Incontro", t: "«Il fango che ha fatto la storia di una generazione». L’alluvione di Firenze del 4 novembre 1966", luogo: "Palazzo Englefield, Sala di Presidenza" },
+  { d: "2026-12-03", ora: "16", tipo: "Incontro", t: "Anniversario della morte: Charlie Chaplin e la politica", luogo: "Palazzo Englefield, Sala di Presidenza" },
+  { d: "2026-12-10", ora: "16", tipo: "Libri", t: "Presentazione del libro collettaneo «Laudate sie, mi’ Signore»", luogo: "Palazzo Englefield, Sala di Presidenza" },
+  { d: "2026-12-15", ora: "16", tipo: "Libri", t: "Presentazione del romanzo di Paolo Lorizzo «Il mistero della valle»", luogo: "Palazzo Englefield, Sala di Presidenza" },
+  { d: "2026-12-15", fine: "2026-12-17", ora: "10–19", tipo: "Mercatino", t: "Mercatino di Natale", luogo: "Palazzo Englefield" },
+  { d: "2026-11-06", ora: "11–13", tipo: "Corso in partenza", t: "Imparare ad ascoltare per avere fiducia nelle relazioni, con Valeria Silla", luogo: "Palazzo Englefield", url: "https://www.upter.it/2026/11/03/imparare-ad-ascoltare-per-avere-fiducia-nelle-relazioni-di-valeria-silla/" },
+  { d: "2026-11-04", ora: "13–15", tipo: "Corso in partenza", t: "Le basi divertendoti! Corso pratico di fotografia, con Roberto Huner", luogo: "Palazzo Englefield", url: "https://www.upter.it/2026/11/03/le-basi-divertendoti-corso-pratico-di-roberto-huner/" },
+  { d: "2026-11-04", ora: "11–13", tipo: "Corso in partenza", t: "Improvvisazione narrativa: fotografia intermedio, con Roberto Huner", luogo: "Palazzo Englefield", url: "https://www.upter.it/2026/11/03/improvvisazione-narrativa-fotografia-intermedio-di-roberto-huner/" },
+  { d: "2026-11-03", ora: "15.30–17", tipo: "Corso in partenza", t: "Balli di gruppo, con Simonetta Montecchi", luogo: "Palazzo Englefield", url: "https://www.upter.it/2026/11/03/tai-chi-di-simonetta-montecchi/" }
+];
+
+const GIORNI = { Lun: "lunedì", Mar: "martedì", Mer: "mercoledì", Gio: "giovedì", Ven: "venerdì", Sab: "sabato", Dom: "domenica" };
+const MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+const MESI_BREVI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+const AREE = ["Archeologia e Storia dell'arte","Lettere, Storia e Filosofia","Lingue","Arti, Musica e Spettacolo","Scienze umane e Salute","Tecnologia, Scienze e Lavoro"];
+const AREE_BREVI = { "Archeologia e Storia dell'arte": "Archeologia e arte", "Lettere, Storia e Filosofia": "Storia e lettere", "Lingue": "Lingue", "Arti, Musica e Spettacolo": "Arti, musica, teatro", "Scienze umane e Salute": "Benessere e persone", "Tecnologia, Scienze e Lavoro": "Digitale e lavoro" };
+const PAGE = 20;
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const norm = (s) => String(s ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, " ");
+function dataLunga(iso) { const [y, m, d] = iso.split("-").map(Number); return `${d} ${MESI[m - 1]} ${y}`; }
+function oraInizio(h) { const m = /^(\d{1,2})/.exec(h || ""); return m ? Number(m[1]) : null; }
+function euro(p) { return Number(p) === 0 ? "Gratuito" : `${String(p).replace(".", ",")} €`; }
+function docente(c) { return c.d || "docente da comunicare"; }
+function quandoTesto(c) { const g = c.g.map((x) => GIORNI[x] || x).join(" e "); return c.h ? `${g}, ${c.h}` : `${g} (orario: chiedi in Segreteria)`; }
+
+CORSI.forEach((c) => {
+  c._k = norm([c.c, c.t, c.d, c.m, c.a, c.s].join(" "));
+  c._x = norm(c.x);
+});
+
+const state = { q: "", area: "", giorno: "", sede: "", fascia: "", futuri: false, liberi: false, shown: PAGE };
+try {
+  const saved = JSON.parse(localStorage.getItem("upter-filtri") || "{}");
+  Object.assign(state, { area: saved.area || "", futuri: !!saved.futuri });
+} catch (e) {}
+function salva() { try { localStorage.setItem("upter-filtri", JSON.stringify({ area: state.area, futuri: state.futuri })); } catch (e) {} }
+
+// Filtri iniziali
+const areasEl = $("#areas");
+function chip(label, value) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.textContent = label; b.dataset.value = value;
+  b.addEventListener("click", () => { state.area = value; state.shown = PAGE; salva(); render(); });
+  return b;
+}
+areasEl.append(chip("Tutti", ""));
+AREE.forEach((a) => areasEl.append(chip(AREE_BREVI[a] || a, a)));
+areasEl.append(chip("Esami CILS", "CILS"));
+
+const sedi = [...new Set(CORSI.map((c) => c.s))].sort((a, b) => a.localeCompare(b, "it"));
+sedi.forEach((s) => { const o = document.createElement("option"); o.value = s; o.textContent = s === "Itinerante" ? "In giro per Roma (corsi itineranti)" : s; $("#sede").append(o); });
+$("#futuri").checked = state.futuri;
+
+function filtra() {
+  const parole = norm(state.q).split(/\s+/).filter(Boolean);
+  const out = [];
+  for (const c of CORSI) {
+    if (state.area === "CILS" ? c.m !== "Esami CILS" : (state.area && c.a !== state.area)) continue;
+    if (state.giorno && !c.g.includes(state.giorno)) continue;
+    if (state.sede && c.s !== state.sede) continue;
+    if (state.futuri && c.i <= OGGI) continue;
+    if (state.liberi && c.z === "E") continue;
+    if (state.fascia) {
+      const h = oraInizio(c.h);
+      if (h === null) continue;
+      if (state.fascia === "m" && h >= 13) continue;
+      if (state.fascia === "p" && (h < 13 || h >= 19)) continue;
+      if (state.fascia === "s" && h < 19) continue;
+    }
+    let score = 0;
+    if (parole.length) {
+      let ok = true;
+      for (const p of parole) {
+        if (c._k.includes(p)) score += 3;
+        else if (c._x.includes(p)) score += 1;
+        else { ok = false; break; }
+      }
+      if (!ok) continue;
+      if (c.c === state.q.trim()) score += 100;
+    }
+    out.push([score, c]);
+  }
+  out.sort((a, b) => {
+    if (b[0] !== a[0]) return b[0] - a[0];
+    const fa = a[1].i > OGGI, fb = b[1].i > OGGI;
+    if (fa !== fb) return fa ? -1 : 1;
+    return fa ? a[1].i.localeCompare(b[1].i) : b[1].i.localeCompare(a[1].i);
+  });
+  return out.map((x) => x[1]);
+}
+
+const ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>';
+const ICON_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+
+function testoCondivisione(c) {
+  return `Corso Upter «${c.t}» (cod. ${c.c})\nDocente: ${docente(c)}\nQuando: ${quandoTesto(c)}, dal ${dataLunga(c.i)}\nDove: ${c.s === "Itinerante" ? "in giro per Roma" : c.s}\nCosto: ${euro(c.p)}${c.n ? ` per ${c.n} ${c.n === 1 ? "incontro" : "lezioni"}` : ""}, più la quota associativa\nInformazioni: Segreteria Upter, 06 9826 6300, info@upter.it${c.u ? `\nIscrizione online: ${c.u}` : ""}`;
+}
+
+function iscriviti(c) {
+  if (c.m === "Esami CILS") return `<a class="btn" href="#regole" data-goto="regole">Come iscriversi all’esame</a>`;
+  if (c.z === "E") return `<span class="btn off" aria-disabled="true">Posti esauriti</span>`;
+  if (c.u) return `<a class="btn go" href="${esc(c.u)}" target="_blank" rel="noopener">Iscriviti ora</a>`;
+  return `<a class="btn go" href="#regole" data-goto="regole">Iscriviti ora</a>`;
+}
+
+function scheda(c) {
+  const futuro = c.i > OGGI;
+  const quando = quandoTesto(c);
+  let badge = futuro ? `<span class="badge soon">Inizia il ${dataLunga(c.i)}</span>` : `<span class="badge past">Iniziato il ${dataLunga(c.i)}</span>`;
+  if (c.z === "E") badge += `<span class="badge full">Posti esauriti</span>`;
+  else if (c.z === "U") badge += `<span class="badge soon">Ultimi posti</span>`;
+  const dove = c.s === "Itinerante" ? "In giro per Roma" : c.s;
+  const extra = [];
+  if (c.f) extra.push(`<p><b>Primo appuntamento:</b> ${esc(c.f)}.</p>`);
+  if (c.x) extra.push(`<p>${esc(c.x)}</p>`);
+  if (c.m === "Esami CILS") extra.push(`<p><b>Iscrizione solo di persona</b> in Segreteria, Via Quattro Novembre 157. Non si prenota online.</p>`);
+  if (c.z === "E") extra.push(`<p><b>I posti sono esauriti.</b> Chiedi in Segreteria se si libera un posto o se è prevista un’altra edizione.</p>`);
+  else if (!futuro && c.m !== "Esami CILS") extra.push(`<p>Il corso è già cominciato. Chiedi in Segreteria se si può ancora entrare.</p>`);
+  if (c.m === "Ballo e danza") extra.push(`<p><b>Serve il certificato medico</b> per attività non agonistica, da portare dopo la conferma che il corso parte.</p>`);
+  if (c.m === "Mente e corpo") extra.push(`<p>Chiedi in Segreteria se per questo corso serve il certificato medico.</p>`);
+  extra.push(`<p class="hint">Al costo del corso si aggiunge la quota associativa annuale (30 euro), se non l’hai già pagata. Date e orari possono cambiare: chiedi conferma in Segreteria.</p>`);
+  const wa = "https://wa.me/?text=" + encodeURIComponent(testoCondivisione(c));
+  return `<article class="course">
+    <div class="head"><div><span class="code">cod. ${esc(c.c)} · ${esc(c.m)}</span><h3>${esc(c.t)}</h3><span class="teacher">con ${esc(docente(c))}</span></div><div class="badges">${badge}</div></div>
+    <dl class="facts">
+      <div><dt>Quando</dt><dd>${esc(quando)}</dd></div>
+      <div><dt>Dove</dt><dd>${esc(dove)}</dd></div>
+      ${c.n ? `<div><dt>Lezioni</dt><dd>${c.n}</dd></div>` : ""}
+      <div><dt>Costo</dt><dd>${euro(c.p)}</dd></div>
+    </dl>
+    <details><summary>Di che cosa parla e come iscriversi</summary>${extra.join("")}
+      <p><a href="#regole" data-goto="regole">Come ci si iscrive, rimborsi e cambi</a></p>
+    </details>
+    <div class="actions">
+      ${iscriviti(c)}
+      <a class="btn ghost" href="${esc(wa)}" target="_blank" rel="noopener">${ICON_WA} Manda su WhatsApp</a>
+      <button class="btn ghost" type="button" data-copy="${esc(c.c)}">${ICON_COPY} Copia le informazioni</button>
+    </div>
+    <p class="hint">${c.m === "Esami CILS" ? "L’iscrizione agli esami CILS si fa solo di persona, in Segreteria." : "Puoi iscriverti anche di persona in Segreteria, Via Quattro Novembre 157. Informazioni: 06 9826 6300."}</p>
+  </article>`;
+}
+
+function render() {
+  [...areasEl.children].forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.value === state.area)));
+  if (!CORSI.length) {
+    $("#count").textContent = "";
+    $("#list").innerHTML = `<div class="empty"><h3>Non riesco a caricare i corsi</h3><p>Controlla di essere collegato a internet e riapri la pagina. Per informazioni puoi chiamare la Segreteria: 06 9826 6300.</p></div>`;
+    $("#more").hidden = true;
+    return;
+  }
+  const res = filtra();
+  const n = res.length;
+  $("#count").textContent = n === 0 ? "Nessun corso trovato." : n === 1 ? "1 corso trovato." : `${n} corsi trovati.`;
+  if (n === 0) {
+    $("#list").innerHTML = `<div class="empty"><h3>Nessun corso con queste scelte</h3><p>Prova a scrivere meno parole, oppure scegli «Tutti» negli argomenti e «Tutti i giorni». Puoi anche chiedere alla Segreteria: 06 9826 6300.</p></div>`;
+  } else {
+    $("#list").innerHTML = res.slice(0, state.shown).map(scheda).join("");
+  }
+  $("#more").hidden = n <= state.shown;
+  $("#more").textContent = `Mostra altri corsi (${Math.max(0, n - state.shown)} rimanenti)`;
+}
+
+let timer;
+$("#q").addEventListener("input", (e) => { clearTimeout(timer); timer = setTimeout(() => { state.q = e.target.value; state.shown = PAGE; render(); }, 150); });
+["giorno", "sede", "fascia"].forEach((id) => $("#" + id).addEventListener("change", (e) => { state[id] = e.target.value; state.shown = PAGE; render(); }));
+$("#futuri").addEventListener("change", (e) => { state.futuri = e.target.checked; state.shown = PAGE; salva(); render(); });
+$("#liberi").addEventListener("change", (e) => { state.liberi = e.target.checked; state.shown = PAGE; render(); });
+$("#more").addEventListener("click", () => { state.shown += PAGE; render(); });
+
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), 2600); }
+$("#list").addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-copy]");
+  if (b) {
+    const c = CORSI.find((x) => x.c === b.dataset.copy);
+    const txt = testoCondivisione(c);
+    try { await navigator.clipboard.writeText(txt); toast("Informazioni copiate. Ora puoi incollarle in un messaggio."); }
+    catch (err) { const s = b.closest(".course").querySelector(".facts"); const r = document.createRange(); r.selectNodeContents(s); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast("Copia non riuscita: ho selezionato le informazioni, copiale a mano."); }
+  }
+  const g = e.target.closest("[data-goto]");
+  if (g) { e.preventDefault(); document.getElementById(g.dataset.goto).scrollIntoView({ behavior: "smooth" }); }
+});
+
+// Notizie
+function renderNews() {
+  const solo = $("#soloProssimi").checked;
+  const items = EVENTI.filter((e) => !solo || (e.fine || e.d) >= OGGI).sort((a, b) => {
+    const pa = (a.fine || a.d) < OGGI, pb = (b.fine || b.d) < OGGI;
+    if (pa !== pb) return pa ? 1 : -1;
+    return pa ? b.d.localeCompare(a.d) : a.d.localeCompare(b.d);
+  });
+  $("#news").innerHTML = items.map((e) => {
+    const [y, m, d] = e.d.split("-").map(Number);
+    const passato = (e.fine || e.d) < OGGI;
+    const giorni = e.fine ? `${d}–${Number(e.fine.split("-")[2])}` : d;
+    const link = e.url ? ` <a href="${esc(e.url)}" target="_blank" rel="noopener">Leggi sul sito</a>` : "";
+    return `<article class="ev${passato ? " isPast" : ""}">
+      <div class="date"><b>${giorni}</b><small>${MESI_BREVI[m - 1]}</small></div>
+      <div><span class="kind">${esc(e.tipo)}${passato ? " · già svolto" : ""}</span><h3>${esc(e.t)}</h3>
+      <p>Ore ${esc(e.ora)} · ${esc(e.luogo)}.${link}</p></div>
+    </article>`;
+  }).join("") || `<div class="empty"><p>Non ci sono appuntamenti in arrivo. Torna a guardare presto.</p></div>`;
+}
+$("#soloProssimi").addEventListener("change", renderNews);
+
+// Schede (navigazione)
+const VIEWS = ["corsi", "notizie", "canali"];
+function show() {
+  const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "corsi";
+  VIEWS.forEach((x) => { document.getElementById("v-" + x).hidden = x !== v; });
+  document.querySelectorAll("nav.tabs a").forEach((a) => { if (a.dataset.view === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+}
+window.addEventListener("hashchange", show);
+show();
+render();
+renderNews();
+
+// --- solo web app: installazione e funzionamento senza rete ---
+const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+let promptInstall = null;
+function statoInstallazione() {
+  const inst = standalone;
+  document.getElementById("inst-ok").hidden = !inst;
+  document.getElementById("inst-come").hidden = inst;
+  document.getElementById("banner-installa").hidden = inst;
+}
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault(); promptInstall = e;
+  document.getElementById("inst-btn").hidden = false;
+});
+document.getElementById("inst-btn").addEventListener("click", async () => {
+  if (!promptInstall) return;
+  promptInstall.prompt();
+  try { await promptInstall.userChoice; } catch (e) {}
+  promptInstall = null;
+  document.getElementById("inst-btn").hidden = true;
+});
+window.addEventListener("appinstalled", () => { toast("App installata. La trovi tra le altre app."); });
+document.querySelector("[data-goto-installa]").addEventListener("click", (e) => {
+  e.preventDefault(); location.hash = "canali";
+  setTimeout(() => document.getElementById("installa").scrollIntoView({ behavior: "smooth" }), 50);
+});
+statoInstallazione();
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+</script>
+</body>
+</html>
